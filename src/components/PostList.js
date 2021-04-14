@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import styled from "@emotion/styled";
 
-import Note from "./Note";
+import Post from "./Post";
 import { listNotes } from "../graphql/queries";
 import { updateNote, deleteNote } from "../graphql/mutations";
 
@@ -13,13 +13,13 @@ const Container = styled("div")`
 `;
 
 export default () => {
-  const [notes, setNotes] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchNotes = async () => {
       const result = await API.graphql(graphqlOperation(listNotes));
 
-      setNotes(
+      setPosts(
         result.data.listNotes.items.sort((a, b) => {
           if (a.updatedAt > b.updatedAt) return -1;
           else return 1;
@@ -32,8 +32,8 @@ export default () => {
 
   return (
     <Container>
-      {notes.map(note => (
-        <Note
+      {posts.map(note => (
+        <Post
           key={note.id}
           {...note}
           onSaveChanges={async values => {
@@ -47,8 +47,8 @@ export default () => {
               })
             );
 
-            setNotes(
-              notes.map(n => {
+            setPosts(
+              posts.map(n => {
                 return n.id === note.id ? result.data.updateNote : n;
               })
             );
@@ -62,7 +62,7 @@ export default () => {
               })
             );
 
-            setNotes(notes.filter(n => n.id !== note.id));
+            setPosts(posts.filter(n => n.id !== note.id));
           }}
         />
       ))}

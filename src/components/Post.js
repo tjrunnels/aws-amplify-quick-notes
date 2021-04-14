@@ -6,7 +6,7 @@ import { Predictions } from "aws-amplify";
 import RecordingEditor from "./Recording-Editor";
 import PostEditorDialogue from "./Post-Editor-Dialog"
 
-const Note = styled("div")`
+const Post = styled("div")`
   background-color: #ffffff;
   border-radius: 4px;
   margin-bottom: 24px;
@@ -51,7 +51,7 @@ const Divider = styled("div")`
   background-color: #f4f9f4;
 `;
 
-const NoteActions = styled("div")`
+const PostActions = styled("div")`
   display: flex;
   justify-content: stretch;
   align-items: stretch;
@@ -90,13 +90,13 @@ export default props => {
   };
 
   return (
-    <Note>
+    <Post>
       <Info>
         <Title>{props.title}</Title>
         <Text>{props.text}</Text>
       </Info>
       <Divider />
-      <NoteActions>
+      <PostActions>
         <Icon onClick={() => playAudio()}>
           <FaPlay />
         </Icon>
@@ -106,7 +106,7 @@ export default props => {
         <Icon>
           <FaRegTrashAlt onClick={props.onDelete} />
         </Icon>
-      </NoteActions>
+      </PostActions>
 
       {showEditor && (
         <PostEditorDialogue
@@ -118,6 +118,6 @@ export default props => {
           onSaveChanges={props.onSaveChanges}
         />
       )}
-    </Note>
+    </Post>
   );
 };

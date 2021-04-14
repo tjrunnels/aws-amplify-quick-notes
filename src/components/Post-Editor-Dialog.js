@@ -13,7 +13,7 @@ export default props => (
           title={props.title}
           text={props.text}
           onDismiss={props.onDismiss}
-          onSave={async values => { props.onSaveChanges(values) }  }
+          onSave={ props.onSaveChanges }  
         />
     </Dialog>
 );

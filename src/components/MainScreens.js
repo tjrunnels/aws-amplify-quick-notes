@@ -4,7 +4,7 @@ import { Auth, API, graphqlOperation } from "aws-amplify";
 import { Button } from "@rebass/emotion";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@reach/tabs";
 
-import Notes from "./Notes";
+import Notes from "./PostList";
 import Record from "./Record";
 import PostEditor from "./Post-Editor"
 
