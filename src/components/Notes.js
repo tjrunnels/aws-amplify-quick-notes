@@ -37,6 +37,7 @@ export default () => {
           key={note.id}
           {...note}
           onSaveChanges={async values => {
+            console.log("saving Post edit")
             const result = await API.graphql(
               graphqlOperation(updateNote, {
                 input: {

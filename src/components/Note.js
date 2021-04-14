@@ -4,6 +4,7 @@ import { FaRegEdit, FaPlay, FaRegTrashAlt } from "react-icons/fa";
 import { Predictions } from "aws-amplify";
 
 import RecordingEditor from "./Recording-Editor";
+import PostEditorDialogue from "./Post-Editor-Dialog"
 
 const Note = styled("div")`
   background-color: #ffffff;
@@ -108,13 +109,13 @@ export default props => {
       </NoteActions>
 
       {showEditor && (
-        <RecordingEditor
+        <PostEditorDialogue
           title={props.title}
           text={props.text}
           onDismiss={() => {
             setShowEditor(false);
           }}
-          onSave={props.onSaveChanges}
+          onSaveChanges={props.onSaveChanges}
         />
       )}
     </Note>

@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import { Auth } from "aws-amplify";
+import { Auth, API, graphqlOperation } from "aws-amplify";
 import { Button } from "@rebass/emotion";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@reach/tabs";
 
 import Notes from "./Notes";
 import Record from "./Record";
+import PostEditor from "./Post-Editor"
+
+import { createNote } from "../graphql/mutations";
+
+
 
 const Header = styled("div")`
   background-color: #ffffff;
@@ -91,7 +96,7 @@ export default () => {
   return (
     <>
       <Header>
-        <Title>Quick Notes</Title>
+        <Title>Micro-Blog</Title>
         <SignOutButton
           onClick={() => {
             Auth.signOut().then(() => window.location.reload());
@@ -102,15 +107,26 @@ export default () => {
       </Header>
       <StyledTabs index={tabIndex} onChange={index => setTabIndex(index)}>
         <StyledTabList>
-          <StyledTab>Notes</StyledTab>
-          <StyledTab>Record</StyledTab>
+          <StyledTab>Posts</StyledTab>
+          <StyledTab>Create Post</StyledTab>
         </StyledTabList>
         <StyledTabPanels>
           <StyledTabPanel>
             {tabIndex === 0 && <Notes setTabIndex={setTabIndex} />}
           </StyledTabPanel>
           <StyledTabPanel>
-            {tabIndex === 1 && <Record setTabIndex={setTabIndex} />}
+            {tabIndex === 1 && <PostEditor
+                                  text={"new post who dis"}
+                                  onDismiss={() => {
+                                    console.log("postEditor dismissed")
+                                  }}
+                                  onSave={async data => {
+                                    await API.graphql(graphqlOperation(createNote, { input: data }));
+                                    //props.setTabIndex(0);
+                                  }}
+                                  setTabIndex = {setTabIndex}
+                                />
+            }
           </StyledTabPanel>
         </StyledTabPanels>
       </StyledTabs>

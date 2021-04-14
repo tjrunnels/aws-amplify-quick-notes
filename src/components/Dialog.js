@@ -22,6 +22,7 @@ const StyledDialogContent = styled(DialogContent)`
   margin: 24px auto;
 `;
 
+//export a container that looks like a pop-up
 export default props => (
   <Dialog>
     <StyledDialogOverlay>

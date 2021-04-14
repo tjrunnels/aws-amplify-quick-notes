@@ -4,7 +4,7 @@ import { Authenticator } from "aws-amplify-react";
 import styled from "@emotion/styled";
 
 import awsExports from "./aws-exports";
-import Screens from "./components/Screens";
+import MainScreen from "./components/MainScreens";
 
 const Title = styled("h1")`
   text-align: center;
@@ -64,10 +64,10 @@ function App() {
   }, []);
 
   return state.isLoggedIn ? (
-    <Screens />
+    <MainScreen />
   ) : (
     <>
-      <Title>Quick Notes</Title>
+      <Title>Micro-Blog</Title>
       <Authenticator
         onStateChange={authState => {
           if (authState === "signedIn") {
